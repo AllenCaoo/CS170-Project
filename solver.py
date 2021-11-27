@@ -1,5 +1,3 @@
-import math
-import sys
 import os
 from parse import read_input_file, write_output_file
 
@@ -31,14 +29,30 @@ def solve(tasks):
     return knapSack(W, N, tasks)
 
 
+# def get_correct(out_path, tasks):
+#     file = open(out_path, 'r')
+#     order = file.readlines()
+#     time = 1
+#     profit = 0
+#     for task in order:
+#         tn = int(task)-1
+#         # print(tasks[tn].get_task_id())
+#         time += tasks[tn].get_duration()
+#         if (time > 1440):
+#             break
+#         profit += tasks[tn].get_late_benefit(time - tasks[tn].get_deadline())
+#     return profit
+
 if __name__ == '__main__':
     for inp in os.listdir('samples/'):
         if (inp[-2:] == 'in'):
             input_path = 'samples/' + inp
             output_path = 'sample_outputs/' + inp[:-3] + '.out'
             tasks = read_input_file(input_path)
-            output = solve(tasks)
-            print("profit: " + str(output))
+            actual = solve(tasks)
+            print("actual profit:", str(actual))
+            # expected = get_correct(output_path, tasks)
+            # print("expected profit:", str(expected))
 
 
 # Here's an example of how to run your solver.
