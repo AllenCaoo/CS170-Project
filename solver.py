@@ -1,5 +1,5 @@
 import os
-from parse import read_input_file
+from parse import read_input_file, write_output_file
 from random import randint
 
 def solve(tasks):
@@ -12,8 +12,8 @@ def solve(tasks):
             # of their current position
             j = i-1
             while j >= 0 and weight(key, t, d, p) < weight(tasks[j], t, d, p) :
-                    tasks[j+1] = tasks[j]
-                    j -= 1
+                tasks[j+1] = tasks[j]
+                j -= 1
             tasks[j+1] = key
 
     def weight(task, t, d, p):
@@ -78,9 +78,9 @@ def solve(tasks):
     if tempmax > maximum:
         maximum = tempmax
         maximumhistory = tempmaxhist
-    for t in range(0, 6):
-        for d in range(0, 6):
-            for p in range(-5, 1):
+    for t in range(0, 4):
+        for d in range(0, 4):
+            for p in range(-3, 1):
                 sort(tasks, t, d, p)
                 tempmax, tempmaxhist = knapSack(W, N, tasks)
                 if at%10 == 0:
@@ -92,22 +92,46 @@ def solve(tasks):
                     maximum = tempmax
                     maximumhistory = tempmaxhist
                 at+=1
-    print(maximum)
+    print("profit " + str(maximum))
     return maximumhistory
 
 
 if __name__ == '__main__':
-    for inp in os.listdir('samples/'):
+    for inp in os.listdir('inputs/large/'):
         if (inp[-2:] == 'in'):
-            input_path = 'samples/' + inp
+            print('\n')
+            input_path = 'inputs/large/' + inp
+            print("Testing " + input_path)
+            tasks = read_input_file(input_path)
+            actual = solve(tasks)
+            print(actual)
+            output_path = 'outputs/large/' + inp[:-3] + '.out'
+            print("wrote to: " + output_path)
+            write_output_file(output_path, actual)
+    for inp in os.listdir('inputs/medium/'):
+        if (inp[-2:] == 'in'):
+            print('\n')
+            input_path = 'inputs/medium/' + inp
+            print("Testing " + input_path)
+            tasks = read_input_file(input_path)
+            actual = solve(tasks)
+            print(actual)
+            output_path = 'outputs/medium/' + inp[:-3] + '.out'
+            print("wrote to: " + output_path)
+            write_output_file(output_path, actual)
+    for inp in os.listdir('inputs/small/'):
+        if (inp[-2:] == 'in'):
+            print('\n')
+            input_path = 'inputs/small/' + inp
+            print("Testing " + input_path)
             # output_path = 'sample_outputs/' + inp[:-3] + '.out'
             tasks = read_input_file(input_path)
             actual = solve(tasks)
-            h = bin(actual[0])
-            print(str(actual))
-            # expected = get_correct(output_path, tasks)
-            # print("expected profit:", str(expected))
-
+            print(actual)
+            output_path = 'outputs/small/' + inp[:-3] + '.out'
+            print("wrote to: " + output_path)
+            write_output_file(output_path, actual)
+    
 
 # Here's an example of how to run your solver.
 # if __name__ == '__main__':
