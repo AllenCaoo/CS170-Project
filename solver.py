@@ -53,7 +53,6 @@ def solve(tasks):
         for i in range(0, len(h)):
             if h[i] == '1':
                 historyArray.append(tasks[i].get_task_id())
-        print("profit:", str(maximum))
         return maximum, historyArray
 
     W = 1440
@@ -61,15 +60,14 @@ def solve(tasks):
     maximum = -1
     maximumhistory = []
     at = 1
-    tasks_orig = tasks[:]
     
     tempmax, tempmaxhist = knapSack(W, N, tasks)
     if tempmax > maximum:
         maximum = tempmax
         maximumhistory = tempmaxhist
-    for t in range(0, 5):
-        for d in range(0, 5):
-            for p in range(-4, 1):
+    for t in range(0, 4):
+        for d in range(0, 4):
+            for p in range(-3, 1):
                 sort(tasks, t, d, p)
                 tempmax, tempmaxhist = knapSack(W, N, tasks)
                 #if at%10 == 0:
@@ -81,6 +79,7 @@ def solve(tasks):
                     maximum = tempmax
                     maximumhistory = tempmaxhist
                 at+=1
+    print("profit:", str(maximum))
     return maximumhistory
 
 
