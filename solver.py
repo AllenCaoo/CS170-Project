@@ -3,16 +3,12 @@ from parse import read_input_file, write_output_file
 
 def solve(tasks):
     def sort(tasks, t, d, p):
-        # Traverse through 1 to len(arr)
         for i in range(1, len(tasks)):
             key = tasks[i]
-            # Move elements of arr[0..i-1], that are
-            # greater than key, to one position ahead
-            # of their current position
             j = i-1
-            while j >= 0 and weight(key, t, d, p) < weight(tasks[j], t, d, p):
-                tasks[j+1] = tasks[j]
-                j -= 1
+            while j >= 0 and weight(key, t, d, p) < weight(tasks[j], t, d, p) :
+                    tasks[j+1] = tasks[j]
+                    j -= 1
             tasks[j+1] = key
 
     def weight(task, t, d, p):
@@ -50,7 +46,6 @@ def solve(tasks):
             if maximum < K[n][i]:
                 maximum = K[n][i]
                 historyMax = history[n][i]
-        
         historyArray = []
         h = bin(historyMax)
         h = h[2:]
@@ -58,13 +53,7 @@ def solve(tasks):
         for i in range(0, len(h)):
             if h[i] == '1':
                 historyArray.append(tasks[i].get_task_id())
-
-        #i = len(tasks) - 1
-        #while i > 0:
-        #    if h[i] == '1':
-        #        historyArray.append(tasks[i].get_task_id())
-        #    i -= 1
-
+        print("profit:", str(maximum))
         return maximum, historyArray
 
     W = 1440
@@ -72,26 +61,26 @@ def solve(tasks):
     maximum = -1
     maximumhistory = []
     at = 1
+    tasks_orig = tasks[:]
     
     tempmax, tempmaxhist = knapSack(W, N, tasks)
     if tempmax > maximum:
         maximum = tempmax
         maximumhistory = tempmaxhist
-    for t in range(0, 4):
-        for d in range(0, 4):
-            for p in range(-3, 1):
+    for t in range(0, 5):
+        for d in range(0, 5):
+            for p in range(-4, 1):
                 sort(tasks, t, d, p)
                 tempmax, tempmaxhist = knapSack(W, N, tasks)
-                if at%10 == 0:
-                    out = ""
-                    for i in range(0, len(tasks)):
-                        out += str(tasks[i].get_task_id()) + " "
-                    # print("[", out, "]")
+                #if at%10 == 0:
+                #    out = ""
+                #    for i in range(0, len(tasks)):
+                #        out += str(tasks[i].get_task_id()) + " "
+                #    print("[", out, "]")
                 if tempmax > maximum:
                     maximum = tempmax
                     maximumhistory = tempmaxhist
-                at += 1
-    print("profit " + str(maximum))
+                at+=1
     return maximumhistory
 
 
@@ -123,7 +112,6 @@ if __name__ == '__main__':
             print('\n')
             input_path = 'inputs/small/' + inp
             print("Testing " + input_path)
-            # output_path = 'sample_outputs/' + inp[:-3] + '.out'
             tasks = read_input_file(input_path)
             actual = solve(tasks)
             print(actual)
