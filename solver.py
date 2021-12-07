@@ -1,6 +1,5 @@
 import os
 from parse import read_input_file, write_output_file
-from random import randint
 
 def solve(tasks):
     def sort(tasks, t, d, p):
@@ -11,7 +10,7 @@ def solve(tasks):
             # greater than key, to one position ahead
             # of their current position
             j = i-1
-            while j >= 0 and weight(key, t, d, p) < weight(tasks[j], t, d, p) :
+            while j >= 0 and weight(key, t, d, p) < weight(tasks[j], t, d, p):
                 tasks[j+1] = tasks[j]
                 j -= 1
             tasks[j+1] = key
@@ -44,7 +43,7 @@ def solve(tasks):
                         history[i][w] = history[i-1][w]
                 else:
                     K[i][w] = K[i-1][w]
-    
+                    history[i][w] = history[i-1][w]
         maximum = -1
         historyMax = 0
         for i in range(0, W):
@@ -91,7 +90,7 @@ def solve(tasks):
                 if tempmax > maximum:
                     maximum = tempmax
                     maximumhistory = tempmaxhist
-                at+=1
+                at += 1
     print("profit " + str(maximum))
     return maximumhistory
 
