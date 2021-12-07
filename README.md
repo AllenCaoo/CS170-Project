@@ -1,17 +1,11 @@
 # CS 170 Project Fall 2021
 
-Take a look at the project spec before you get started!
+Members: Allen Cao, Shiladitya Dutta, Michael Zheng
 
-Requirements:
+Instructions on how to generate outputs:
 
-Python 3.6+
-
-Files:
-- `parse.py`: functions to read/write inputs and outputs
-- `solver.py`: where you should be writing your code to solve inputs
-- `Task.py`: contains a class that is useful for processing inputs
-
-When writing inputs/outputs:
-- Make sure you use the functions `write_input_file` and `write_output_file` provided
-- Run the functions `read_input_file` and `read_output_file` to validate your files before submitting!
-- These are the functions run by the autograder to validate submissions
+1. Have a folder of inputs ready. Folder name should be called "inputs" and there should be subfolders in the 
+folder called "large", "medium", and "small". In each subfolder, there should be .in files.
+2. Have a folder of outputs ready. Folder name should be called "ouputs" and there should be subfolders in the 
+folder called "large", "medium", and "small". There does not need to be existing files in each subfolder.
+3. run ```python3 solver.py``` to generate the outputs.
